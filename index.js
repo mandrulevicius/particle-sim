@@ -47,13 +47,13 @@ setInterval(() => {
     // or just touching, and everything else going to air?
     // sun and other hot objects have different mechanism? or same really?
     const energyEmission = (particle.mass / particle.shc) * (particle.currentEnergy - ZERO_ENERGY);
-    particle.currentEnergy -= energyEmission / 60;
+    particle.currentEnergy -= energyEmission / 60; // maybe should save delta along with current value
     // per second rather than minute, depends on interval
     console.log('particle.currentEnergy', particle.currentEnergy);
     console.log('energyEmission', energyEmission);
   });
 }, 1000);
-
+// add pause, speedup, slowdown, (reverse)
 
 
 // after personal release, integrate with gta and make a demo of making a sword
