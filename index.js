@@ -1,20 +1,22 @@
 'use strict';
 
-const ATOM_PARTICLES = {
+const ATOMS = {
   iron: ['Fe', 0.0003, 0.45]
 };
-const MOLECULE_PARTICLES = ['H2O'];
-const CELL_PARTICLES = [];
-const ORGAN_PARTICLES = [];
-const ORGANISM_PARTICLES = [];
+const MOLECULES = ['H2O'];
+const CELLS = {};
+const ORGANS = {};
+const ORGANISMS = {};
+// MACRO_ORGANISMS = {'earth'};
 // maybe AI can do part of this?
 
 const activeParticles = [];
 const continuousInteractions = [];
 const passiveParticles = [];
+const partOfBiggerOrganismParticles = [];
 
 const lumpOfIron = {
-  template: ATOM_PARTICLES.iron,
+  template: ATOMS.iron,
   numberOfParticles: 10000,
   currentEnergyPerParticle: 0.0027,
   position: { x: 30, y: -45, z: 0.4 }
