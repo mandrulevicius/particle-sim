@@ -1,5 +1,6 @@
 'use strict';
 
+// photons? basic particles? too deep?
 const ATOMS = {
   iron: ['Fe', 0.0003, 0.45]
 };
@@ -31,6 +32,8 @@ const bucketOfWater = {
 // maybe should not only define position, but also relation to other objects. push or pull or merge.
 
 // add air(pocketOfParticles), add earth(lumpOfIron), add water (bucketOfWater), add sun
+// fire (pocketofHighEnergyParticles?) nah thats just heat. fire is a chemical reaction?
+// all just particles in different states.
 
 const ZERO_ENERGY = 0;
 let time = 0;
@@ -48,15 +51,30 @@ setInterval(() => {
     // take a radius based on mass of the object
     // or just touching, and everything else going to air?
     // sun and other hot objects have different mechanism? or same really?
+    // energy with mass or energy without mass, still energy, just behaving slightly differently
+    // have to divide over all interacting objects. or just emit total and its up to whoever picks the signal up
     const energyEmission = (particle.mass / particle.shc) * (particle.currentEnergy - ZERO_ENERGY);
+    // TODO move below line to 
     particle.currentEnergy -= energyEmission / 60; // maybe should save delta along with current value
     // per second rather than minute, depends on interval
     console.log('particle.currentEnergy', particle.currentEnergy);
     console.log('energyEmission', energyEmission);
+    emitEnergy(energyEmission);
+    receiveEnergyEmitters()
   });
 }, 1000);
 // add pause, speedup, slowdown, (reverse)
 
+function emitEnergy(totalEnergyEmission) {
+  // just send it off into 3d space
+  // create a bunch of particles and blast them all around at varying strengths, dependant on temperature and pressure
+}
+
+function receiveEnergyEmitters() {
+  // check 3d space around for incoming particles, add them to local active particles structure
+  // or just trigger on-hit? photon particles hit first. there will be a lot of particles flying around.
+  // have to make this part performant.
+}
 
 // after personal release, integrate with gta and make a demo of making a sword
 //  fully automated asset creation, with 3d models and textures included.
