@@ -83,3 +83,5 @@ function receiveEnergyEmitters() {
 //  determines power of throw. speed determined by mass and power. air has push effect.
 
 // thrust weapon into wall, jump on the handle, jump up on wall picking up weapon and melee thrusting into wall higher up, then using that as a handle to climb.
+
+// a punch to the wall might result in bone cracking. just need to calculate energyEmission + kineticEnergy?
