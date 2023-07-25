@@ -24,7 +24,8 @@ const lumpOfIron = {
   template: ATOMS.iron,
   numberOfParticles: 10000,
   currentEnergyPerParticle: 0.0027,
-  position: { x: 30, y: -45, z: 0.4 }
+  position: { x: 30, y: -45, z: 0.4 },
+  velocity: { x: 0, y: 0, z: 0 }
 };
 
 const bucketOfWater = {
@@ -80,9 +81,13 @@ setInterval(() => {
     // why though? performance considerations?
 
     
-    // TODO move below line to 
+    emitParticles(particle);
+    emitEnergy(energyEmission);
+
+    // TODO move below lines to 
     particle.currentEnergy -= energyEmission / 60; // maybe should save delta along with current value
     // per second rather than minute, depends on interval
+    particle.numberOfParticles -= particleEmission;
     console.log('particle.currentEnergy', particle.currentEnergy);
     console.log('energyEmission', energyEmission);
     emitEnergy(energyEmission);
@@ -91,7 +96,20 @@ setInterval(() => {
 }, 1000);
 // add pause, speedup, slowdown, (reverse)
 
+function emitParticles(parent) {
+  const childParticles = {
+    template: parent.template,
+    numberOfParticles: 10,
+    currentEnergyPerParticle: 0.0027,
+    position: { x: 30, y: -45, z: 0.4 },
+    velocity: { x: 0, y: 0, z: 0 }
+  };
+  return childParticles;
+}
+
+
 function emitEnergy(totalEnergyEmission) {
+  // divide total emission, create particles, set velocity, push to active particles
   // just send it off into 3d space
   // create a bunch of particles and blast them all around at varying strengths, dependant on temperature and pressure
 }
