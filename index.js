@@ -65,6 +65,20 @@ setInterval(() => {
     const energyEmission = (particle.mass / particle.shc) * (particle.currentEnergy - ZERO_ENERGY);
     // this energy emission only considers base energy level
     // should it contain target energy, or should that be calculated at the receiving end?
+    // particle does not know what it is interacting with until it does interact with it
+    // so probably the receiving end
+
+    // particles interact not only through hits, but also by gravity???
+    // basically push or pull
+
+    // interaction does have to be resolved precisely at the point of interaction?
+    // can just be approximated, and only precise measurement of the other particle would resolve the other
+    // but do I really need quantum entanglement right now? No I do not.
+
+    // max particle and field propagation speed - "speed of light"
+    // while particle is traveling at relativistic speed, any calculations about its internal state slow down appropriately.
+    // why though? performance considerations?
+
     
     // TODO move below line to 
     particle.currentEnergy -= energyEmission / 60; // maybe should save delta along with current value
