@@ -1,4 +1,8 @@
 'use strict';
+// this project might change and evolve a lot, so should focus on modularity
+//  ability to switch out parts
+
+// work incrementally - while considering big picture is important, not all pieces have to be in place at the start
 
 // photons? basic particles? too deep?
 const ATOMS = {
@@ -32,7 +36,7 @@ const bucketOfWater = {
 // maybe should not only define position, but also relation to other objects. push or pull or merge.
 
 // add air(pocketOfParticles), add earth(lumpOfIron), add water (bucketOfWater), add sun
-// fire (pocketofHighEnergyParticles?) nah thats just heat. fire is a chemical reaction?
+// fire (pocketofHighEnergyParticles? nah thats just heat). fire is a chemical reaction?
 // all just particles in different states.
 
 const ZERO_ENERGY = 0;
@@ -53,7 +57,15 @@ setInterval(() => {
     // sun and other hot objects have different mechanism? or same really?
     // energy with mass or energy without mass, still energy, just behaving slightly differently
     // have to divide over all interacting objects. or just emit total and its up to whoever picks the signal up
+    // problem is have to emit directionally - take total emissions, spread around
+    // another problem is that clumps of materials have shape which could influence emissions
+
+    // start with point emission, 3d stuff can be done later when having time to think about it, consult people
+    
     const energyEmission = (particle.mass / particle.shc) * (particle.currentEnergy - ZERO_ENERGY);
+    // this energy emission only considers base energy level
+    // should it contain target energy, or should that be calculated at the receiving end?
+    
     // TODO move below line to 
     particle.currentEnergy -= energyEmission / 60; // maybe should save delta along with current value
     // per second rather than minute, depends on interval
