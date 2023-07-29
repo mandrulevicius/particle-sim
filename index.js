@@ -4,7 +4,45 @@
 
 // work incrementally - while considering big picture is important, not all pieces have to be in place at the start
 
+// little bit of functionality, little bit of cleanup. repeat
+
+// should not aim to make it perfect:
+// will need to test a lot of different configurations anyway.
+// even if one model fails, it might still provide interesting data.
+
 // photons? basic particles? too deep?
+// if want to build atoms, need to go protons-neutrons-electrons
+// if want push-pull, need to go protons-neutrons-electrons
+// then single atom mass becomes a derived variable.
+// how to derive shc?
+const PROTON = {
+  mass: 1836,
+  charge: 1
+};
+const NEUTRON = {
+  mass: 1836,
+  charge: 0
+};
+const ELECTRON = {
+  mass: 1,
+  charge: -1
+};
+const PHOTON = {
+  mass: 0,
+  charge: 0
+};
+
+const interactions = {
+  gravity: (mass1, mass2) => {},
+  electromagnetic: (charge1, charge2) => {},
+  weak: (), // ??
+  strong: ()// simple down to nuclear force
+};
+// insert coupling constant?
+// definitely fine-structure constant
+
+// is transforming matter into energy emergent? weak force?
+
 const ATOMS = {
   iron: ['Fe', 0.0003, 0.45]
 };
@@ -14,6 +52,10 @@ const ORGANS = {};
 const ORGANISMS = {};
 // MACRO_ORGANISMS = {'earth'};
 // maybe AI can do part of this?
+// maybe doesnt have to if this is emergent
+
+// in air, boundaries between different compositions and temperatures are quite ephemeral
+// maybe can once again approximate?
 
 const activeParticles = [];
 const continuousInteractions = [];
