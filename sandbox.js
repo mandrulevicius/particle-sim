@@ -3,21 +3,13 @@
 import particleTemplates from './particleTemplates.js';
 import interactions from './interactions.js';
 
-function start() {
+let interval = 1000;
 
-}
+const activeParticles = [];
 
-function stop() {
-
-}
-
-function pause() {
-
-}
-
-function resume() {
-  
-}
+// should not loop by setInterval
+const loop = setInterval(() => {
+}, interval);
 
 function setSpeed() {
 
