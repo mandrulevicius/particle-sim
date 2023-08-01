@@ -16,5 +16,6 @@ const PHOTON = {
   mass: 0,
   charge: 0
 };
+// The energy and momentum of a photon depend only on its frequency
 
 export default { PROTON, NEUTRON, ELECTRON, PHOTON };

@@ -1,15 +1,31 @@
 'use strict';
 
+function getRelevantParticles(particle, allParticles) {
+  // gravity radius based on mass, raycast based on momentum
+  const interactionRadius = calcInteractionRadius(particle);
+  return allParticles.filter((subjectParticle) =>
+    isInRadius(interactionRadius, particle.position, subjectParticle.position));
+}
+
+function isInRadius(radius, position1, position2) {
+  return radius >= calcDistance(position1, position2);
+}
+
+function calcInteractionRadius(particle) {
+  // TODO formula
+  return particle.mass;
+}
+
 function calcInteractions(entity1, entity2) {
-  const distance = calcDistance(entity1.pos, entity2.pos);
+  const distance = calcDistance(entity1.position, entity2.position);
   const gravity = calcGravity(entity1.mass, entity2.mass, distance);
   return gravity;
 }
 
-function calcDistance(pos1, pos2) {
-  const sqDistX = Math.pow(pos2.x - pos1.x);
-  const sqDistY = Math.pow(pos2.y - pos1.y);
-  const sqDistZ = Math.pow(pos2.z - pos1.z);
+function calcDistance(position1, position2) {
+  const sqDistX = Math.pow(position2.x - position1.x);
+  const sqDistY = Math.pow(position2.y - position1.y);
+  const sqDistZ = Math.pow(position2.z - position1.z);
   return Math.sqrt(sqDistX + sqDistY + sqDistZ);
 }
 
@@ -26,4 +42,4 @@ function calcGravity(mass1, mass2, distance) {
 //   strong: ()// simple down to nuclear force
 // };
 
-export default { calcInteractions };
+export default { getRelevantParticles, calcInteractions };

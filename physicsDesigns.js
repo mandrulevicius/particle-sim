@@ -10,6 +10,8 @@
 
 // is transforming matter into energy emergent? weak force?
 
+//E2 = p2c2 + m2c4 - energy equation
+
 const ATOMS = {
   iron: ['Fe', 0.0003, 0.45]
 };
