@@ -3,28 +3,18 @@
 import particleTemplates from './particleTemplates.js';
 import interactions from './interactions.js';
 
-let interval = 0;
+let interval = 0; // sim speed
+let tickLength = 1; // calculation precision??
+let loop;
 
 const allParticles = [];
 const activeParticles = [];
 
-// should not loop by setInterval
-const loop = setInterval(() => {
-  if (interval === 0) return;
-  // if interval < 0 reverse
-  allParticles.forEach((particle) => {
-    const relevantParticles = interactions.getRelevantParticles(particle, allParticles);
-    relevantParticles.forEach((relevantParticle) => {
-      const force = interactions.calcInteractions(particle, relevantParticle);
-      // apply force - add appropriate velocity
-      
-    });
-  });
-  // apply motion
-}, interval);
-
 function init() {
   addParticles(particleTemplates.PROTON, 1);
+  console.log(allParticles)
+  loop = setInterval(() => updatePhysics(), interval * 1000);
+  // should not loop by setInterval
 }
 
 function start(speed) {
@@ -32,7 +22,9 @@ function start(speed) {
 }
 
 function setSpeed(speed) {
-  interval = 1000 / speed;
+  interval = 1 / speed;
+  clearInterval(loop);
+  loop = setInterval(() => updatePhysics(), interval * 1000);
 }
 
 function addParticles(template, amount) {
@@ -46,6 +38,24 @@ function createParticle(template) {
     position: { x: 0, y: 0, z: 0 },
     velocity: { x: 0, y: 0, z: 0 }
   };
+}
+
+function updatePhysics() {
+  if (interval === 0) return;
+  // if interval < 0 reverse
+  allParticles.forEach((particle) => {
+    const relevantParticles = interactions.getRelevantParticles(particle, allParticles);
+    relevantParticles.forEach((relevantParticle) => {
+      relevantParticle.velocity = interactions.calcInteractions(particle, relevantParticle);
+    });
+  });
+  allParticles.forEach((particle) => {
+    console.log(particle);
+    particle.position.x += particle.velocity.x * tickLength;
+    particle.position.y += particle.velocity.y * tickLength;
+    particle.position.z += particle.velocity.z * tickLength;
+    console.log(particle);
+  });
 }
 
 export default { init, start, setSpeed };
