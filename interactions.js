@@ -51,11 +51,19 @@ function normalizeVector(vector) {
   const sqY = vector.y * vector.y;
   const sqZ = vector.z * vector.z;
   const magnitude = Math.sqrt(sqX + sqY + sqZ);
+  if (magnitude === 0) return { x: vector.x, y: vector.y, z: vector.z };
   return {
     x: vector.x / magnitude,
     y: vector.y / magnitude,
     z: vector.z / magnitude
   }
+}
+
+const GRAVITATIONAL_CONSTANT = 6.673 * Math.pow(10, -11);
+function calcGravity(mass1, mass2, distance) {
+  if (distance === 0) return 0; // should affect itself (especially if bigger entity)
+  return (GRAVITATIONAL_CONSTANT * mass1 * mass2) / Math.pow(distance, 2);
+  // gravity should propagate at speed of light, but its fine for now
 }
 
 function calcForce(magnitude, vector) {
@@ -72,12 +80,6 @@ function combineVectors(vector1, vector2) {
     y: vector1.y + vector2.y,
     z: vector1.z + vector2.z
   }
-}
-
-const GRAVITATIONAL_CONSTANT = 6.673 * Math.pow(10, -11);
-function calcGravity(mass1, mass2, distance) {
-  // gravity should propagate at speed of light, but its fine for now
-  return (GRAVITATIONAL_CONSTANT * mass1 * mass2) / Math.pow(distance, 2);
 }
 
 // const interactions = {

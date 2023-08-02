@@ -11,7 +11,7 @@ const allParticles = [];
 const activeParticles = [];
 
 function init() {
-  addParticles(particleTemplates.PROTON, 1);
+  addParticles(particleTemplates.PROTON, 2);
   console.log(allParticles)
   loop = setInterval(() => updatePhysics(), interval * 1000);
   // should not loop by setInterval
@@ -28,14 +28,15 @@ function setSpeed(speed) {
 }
 
 function addParticles(template, amount) {
-  for (let i = 0; i < amount; i++) allParticles.push(createParticle(template));
+  for (let i = 0; i < amount; i++)
+    allParticles.push(createParticle(template, { x: i, y: 0, z: 0 }));
 }
 
-function createParticle(template) {
+function createParticle(template, position) {
   return {
     ...template,
     //energy: 0, // derivative from velocity and mass???
-    position: { x: 0, y: 0, z: 0 },
+    position: position || { x: 0, y: 0, z: 0 },
     velocity: { x: 0, y: 0, z: 0 }
   };
 }
@@ -50,7 +51,6 @@ function updatePhysics() {
     });
   });
   allParticles.forEach((particle) => {
-    console.log(particle);
     particle.position.x += particle.velocity.x * tickLength;
     particle.position.y += particle.velocity.y * tickLength;
     particle.position.z += particle.velocity.z * tickLength;

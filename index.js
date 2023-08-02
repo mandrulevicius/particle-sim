@@ -3,4 +3,4 @@
 import sandbox from './sandbox.js';
 
 sandbox.init();
-setTimeout(() => sandbox.start(1), 3000);
+setTimeout(() => sandbox.start(0.5), 1000);
